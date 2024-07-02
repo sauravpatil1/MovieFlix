@@ -15,10 +15,14 @@ const routeConfig = {
   },
 };
 
+const screenOptions = {header: () => null};
+
 function RootNavigation() {
   return (
     <NavigationContainer>
-      <Stack.Navigator initialRouteName={Constants.screens.homeScreen}>
+      <Stack.Navigator
+        initialRouteName={Constants.screens.homeScreen}
+        screenOptions={screenOptions}>
         {Object.keys(routeConfig).map(screenName => {
           const screenComponent = routeConfig[screenName].screen;
           return (
