@@ -2,18 +2,25 @@ import {Image, Pressable, StyleSheet, Text, View} from 'react-native';
 import Colors from '../../../common/Colors';
 import Constants from '../../../common/Constants';
 import GenreList from './GenreList';
+import {useCallback} from 'react';
+import {NavigationProp} from '@react-navigation/native';
 
 const SEARCH_ICON = require('./../../../assets/searchIcon.png');
 
-function Header() {
+interface IProps {
+  navigation: NavigationProp<any>;
+}
+
+function Header(props: IProps) {
+  const {navigation} = props;
+  const navigateToSearchScreen = useCallback(() => {
+    navigation.navigate(Constants.screens.searchScreen);
+  }, []);
   return (
     <View style={styles.container}>
       <View style={styles.header}>
         <Text style={styles.title}>{Constants.strings.movieFlix}</Text>
-        <Pressable
-          onPress={() => {
-            /** TODO : navigateToModel */
-          }}>
+        <Pressable onPress={navigateToSearchScreen}>
           <Image source={SEARCH_ICON} />
         </Pressable>
       </View>

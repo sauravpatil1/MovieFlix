@@ -1,11 +1,17 @@
 import {StyleSheet, View} from 'react-native';
 import Colors from '../../../common/Colors';
 import Header from '../components/Header';
+import {NavigationProp} from '@react-navigation/native';
 
-function HomeScreen() {
+interface IProps {
+  navigation: NavigationProp<any>;
+}
+
+function HomeScreen(props: IProps) {
+  const {navigation} = props;
   return (
     <View style={styles.container}>
-      <Header />
+      <Header navigation={navigation} />
     </View>
   );
 }
