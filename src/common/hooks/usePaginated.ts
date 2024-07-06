@@ -1,6 +1,6 @@
 import {useState, useEffect} from 'react';
 
-const usePaginated = (initialUrl: string) => {
+const usePaginated = (initialUrl: string, formatResponse?:(response : any)=>any) => {
   const [data, setData] = useState<any[]>([]);
   const [loading, setLoading] = useState<boolean>(false);
   const [error, setError] = useState(null);
@@ -15,7 +15,10 @@ const usePaginated = (initialUrl: string) => {
       }
       const result = await response.json();
       setData(prev => {
-        return [prev, result];
+        if(formatResponse){
+          return [...prev, formatResponse(result)]
+        }
+        return [...prev, result];
       });
       setError(null);
     } catch (error: any) {

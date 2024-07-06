@@ -6,14 +6,12 @@ interface IProps {
   movie: IMovie;
 }
 
-const IMAGE_URL =
-  'https://pbs.twimg.com/media/FvUVt3hXgAAxP1H?format=jpg&name=900x900';
 function MovieCard(props: IProps) {
   const {movie} = props;
-  const {title, overview} = movie;
+  const {title, overview, poster_path} = movie;
   return (
     <View style={styles.container}>
-      <Image style={styles.image} source={{uri: IMAGE_URL}} />
+      <Image style={styles.image} source={{uri:Constants.IMAGE_HOST + poster_path }} />
       <View>
         <Text style={styles.title} numberOfLines={2}>
           {title}
@@ -30,10 +28,11 @@ export default MovieCard;
 
 const styles = StyleSheet.create({
   image: {
-    height: 200,
+    height: Constants.dimens.size_200,
+    resizeMode : 'contain'
   },
   container: {
-    height: 300,
+    height: Constants.dimens.size_300,
     padding: Constants.dimens.size_8,
     width: '100%',
   },

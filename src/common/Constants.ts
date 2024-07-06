@@ -1,4 +1,5 @@
 const Constants = {
+  IMAGE_HOST : 'https://image.tmdb.org/t/p/w500/',
   strings: {
     movieFlix: 'MovieFlix',
   },
@@ -12,6 +13,8 @@ const Constants = {
     size_8: 8,
     size_4: 4,
     size_16: 16,
+    size_200 : 200,
+    size_300 : 300
   },
   fontSize: {
     size_14: 14,
