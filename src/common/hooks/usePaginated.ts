@@ -22,7 +22,7 @@ const usePaginated = (initialUrl: string, formatResponse?:(response : any)=>any)
       });
       setError(null);
     } catch (error: any) {
-      setError(error.message);
+      setError(error);
     } finally {
       setLoading(false);
     }
@@ -32,7 +32,7 @@ const usePaginated = (initialUrl: string, formatResponse?:(response : any)=>any)
     fetchData();
   }, [url]);
 
-  return {data, loading, error, setNextPageUrl: setUrl};
+  return {data, loading, error, setUrl};
 };
 
 export default usePaginated;
