@@ -3,17 +3,18 @@ import Colors from '../../../common/Colors';
 import Header from '../components/Header';
 import {NavigationProp} from '@react-navigation/native';
 import MovieList from '../components/MovieList';
+import {useState} from 'react';
 
 interface IProps {
   navigation: NavigationProp<any>;
 }
 
 function HomeScreen(props: IProps) {
-  const {navigation} = props;
+  const [searchText, setSearchText] = useState<string>('');
   return (
     <View style={styles.container}>
-      <Header navigation={navigation} />
-      <MovieList />
+      <Header searchText={searchText} setSearchText={setSearchText} />
+      <MovieList searchText={searchText} />
     </View>
   );
 }

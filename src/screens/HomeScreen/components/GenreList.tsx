@@ -1,5 +1,4 @@
-import {Pressable, ScrollView, StyleSheet, Text} from 'react-native';
-import Colors from '../../../common/Colors';
+import {ScrollView, StyleSheet} from 'react-native';
 import Constants from '../../../common/Constants';
 import Button from '../../../common/components/Button';
 

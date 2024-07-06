@@ -1,26 +1,25 @@
-import {Image, Pressable, StyleSheet, Text, View} from 'react-native';
+import {StyleSheet, Text, TextInput, View} from 'react-native';
 import Colors from '../../../common/Colors';
 import Constants from '../../../common/Constants';
 import GenreList from './GenreList';
-import {useCallback} from 'react';
-import {NavigationProp} from '@react-navigation/native';
-
-const SEARCH_ICON = require('./../../../assets/searchIcon.png');
 
 interface IProps {
-  navigation: NavigationProp<any>;
+  setSearchText: (text: string) => void;
+  searchText: string;
 }
 
 function Header(props: IProps) {
-  const {navigation} = props;
-  const navigateToSearchScreen = useCallback(() => {}, []);
+  const {setSearchText, searchText} = props;
   return (
     <View style={styles.container}>
       <View style={styles.header}>
         <Text style={styles.title}>{Constants.strings.movieFlix}</Text>
-        <Pressable onPress={navigateToSearchScreen}>
-          <Image source={SEARCH_ICON} />
-        </Pressable>
+        <TextInput
+          style={styles.inputContainer}
+          placeholder="Search movie name"
+          onChangeText={setSearchText}
+          value={searchText}
+        />
       </View>
       <GenreList />
     </View>
@@ -45,7 +44,13 @@ const styles = StyleSheet.create({
     color: Colors.darkRed,
     fontSize: Constants.fontSize.size_26,
     marginHorizontal: Constants.dimens.size_16,
-
     fontWeight: 'bold',
+  },
+  inputContainer: {
+    flex: 1,
+    backgroundColor: Colors.white,
+    borderRadius: Constants.dimens.size_2,
+    overflow: 'hidden',
+    marginTop: Constants.dimens.size_8,
   },
 });
