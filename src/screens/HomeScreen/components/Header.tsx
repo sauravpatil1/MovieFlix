@@ -13,9 +13,7 @@ interface IProps {
 
 function Header(props: IProps) {
   const {navigation} = props;
-  const navigateToSearchScreen = useCallback(() => {
-    navigation.navigate(Constants.screens.searchScreen);
-  }, []);
+  const navigateToSearchScreen = useCallback(() => {}, []);
   return (
     <View style={styles.container}>
       <View style={styles.header}>
