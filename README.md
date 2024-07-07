@@ -50,21 +50,21 @@ If you can't get this to work, see the [Troubleshooting](https://reactnative.dev
 
 # Requirements covered
 
-- **Covered all must** have Requirements like -
-  -- Layout and UI
-  -- Default page load state
-  -- Api call
-  -- Genre Filter
-  -- Code Quality.
+- **Covered all must** have Requirements like
+  - Layout and UI
+  - Default page load state
+  - Api call
+  - Genre Filter
+  - Code Quality.
 - Also **covered all bonus** requirements
-  -- App is developed in **React Native**
-  -- Added optimized scroll using flashlist
-  -- Added **Search screen** with infinite scroll.
-  -- Written whole code **typescript**
+  - App is developed in **React Native**
+  - Added optimized scroll using flashlist
+  - Added **Search screen** with infinite scroll.
+  - Written whole code **typescript**
 - Extra requirements done from my end
-  -- **Setup navigation** for whole app.
-  -- Added movie detail page.
-  -- Added loader at end of list when api call made and At page when fetching data.
+  - **Setup navigation** for whole app.
+  - Added movie detail page.
+  - Added loader at end of list when api call made and At page when fetching data.
 
 # Links
 
