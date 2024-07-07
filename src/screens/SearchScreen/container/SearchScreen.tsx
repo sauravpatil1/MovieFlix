@@ -1,12 +1,12 @@
 import {StyleSheet, TextInput, View} from 'react-native';
 import Colors from '../../../common/Colors';
 import Constants from '../../../common/Constants';
-import {useState} from 'react';
 import ApiURL from '../../../ApiURL';
 import MovieList from '../../common/components/MovieList';
+import useSearch from '../hooks/useSearch';
 
 function SearchScreen() {
-  const [searchText, setSearchText] = useState<string>('');
+  const {searchText, debouncedSearchText, setSearchText} = useSearch();
   return (
     <View style={styles.container}>
       <TextInput
@@ -15,7 +15,9 @@ function SearchScreen() {
         onChangeText={setSearchText}
         placeholder="Search movie"
       />
-      {searchText && <MovieList queryParams={`query=${searchText}`} getApiUrl={ApiURL.getSearchUrl}/>}
+      {debouncedSearchText && (
+        <MovieList queryParams={`query=${debouncedSearchText}`} getApiUrl={ApiURL.getSearchUrl} />
+      )}
     </View>
   );
 }
