@@ -1,9 +1,15 @@
 const BASE_URL = 'https://api.themoviedb.org/';
+const API_KEY = '2dca580c2a14b55200e784d157207b4d';
 
 const ApiURL = {
   getMovieListUrl(params: string) {
-    return `${BASE_URL}3/discover/movie?api_key=2dca580c2a14b55200e784
-d157207b4d&${params}`;
+    return `${BASE_URL}3/discover/movie?api_key=${API_KEY}&${params}`;
+  },
+  getGenreListUrl() {
+    return `${BASE_URL}3/genre/movie/list?api_key=${API_KEY}`;
+  },
+  getSearchUrl(searchText: string) {
+    return `${BASE_URL}3/search/movie?api_key=${API_KEY}&query=${searchText}`;
   },
 };
 
