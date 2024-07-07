@@ -57,11 +57,4 @@ const styles = StyleSheet.create({
     marginHorizontal: Constants.dimens.size_16,
     fontWeight: 'bold',
   },
-  inputContainer: {
-    flex: 1,
-    backgroundColor: Colors.white,
-    borderRadius: Constants.dimens.size_2,
-    overflow: 'hidden',
-    marginTop: Constants.dimens.size_8,
-  },
 });
