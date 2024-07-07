@@ -1,11 +1,10 @@
 import {FlashList} from '@shopify/flash-list';
 import {useEffect, useRef, useState} from 'react';
-import MovieListCard from './MovieListCard';
 import usePaginated from '../../../common/hooks/usePaginated';
-
 import Loader from '../../../common/components/Loader';
 import {ActivityIndicator} from 'react-native';
 import Colors from '../../../common/Colors';
+import MovieListCard from './MovieListCard';
 
 interface IProps {
   queryParams: string;

@@ -1,7 +1,8 @@
 import {Image, StyleSheet, Text, View} from 'react-native';
-import {IMovie} from '../interface';
 import Constants from '../../../common/Constants';
 import Colors from '../../../common/Colors';
+import { IMovie } from '../../HomeScreen/interface';
+
 interface IProps {
   movie: IMovie;
 }

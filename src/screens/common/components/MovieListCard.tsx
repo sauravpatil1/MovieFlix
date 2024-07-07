@@ -1,5 +1,5 @@
 import {StyleSheet, Text} from 'react-native';
-import {IMovie} from '../interface';
+import {IMovie} from '../../HomeScreen/interface';
 import MovieCard from './MovieCard';
 import Grid from '../../../common/components/Grid';
 import Constants from '../../../common/Constants';

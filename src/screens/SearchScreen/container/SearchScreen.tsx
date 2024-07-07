@@ -3,7 +3,7 @@ import Colors from '../../../common/Colors';
 import Constants from '../../../common/Constants';
 import {useState} from 'react';
 import ApiURL from '../../../ApiURL';
-import MovieList from '../../HomeScreen/components/MovieList';
+import MovieList from '../../common/components/MovieList';
 
 function SearchScreen() {
   const [searchText, setSearchText] = useState<string>('');

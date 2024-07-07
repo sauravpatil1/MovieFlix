@@ -2,11 +2,11 @@ import {StyleSheet, View} from 'react-native';
 import Colors from '../../../common/Colors';
 import Header from '../components/Header';
 import {NavigationProp} from '@react-navigation/native';
-import MovieList from '../components/MovieList';
 import {useRef, useState} from 'react';
 import useFetch from '../../../common/hooks/useFetch';
 import ApiURL from '../../../ApiURL';
 import {getQueryParams} from '../utils';
+import MovieList from '../../common/components/MovieList';
 
 interface IProps {
   navigation: NavigationProp<any>;
