@@ -2,7 +2,6 @@ import {ScrollView, StyleSheet} from 'react-native';
 import Constants from '../../../common/Constants';
 import Button from '../../../common/components/Button';
 import {IGenre} from '../interface';
-// import {gerns} from '../../../apiData';
 
 interface IProps {
   gerneList: IGenre[];

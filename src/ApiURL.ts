@@ -8,8 +8,8 @@ const ApiURL = {
   getGenreListUrl() {
     return `${BASE_URL}3/genre/movie/list?api_key=${API_KEY}`;
   },
-  getSearchUrl(searchText: string) {
-    return `${BASE_URL}3/search/movie?api_key=${API_KEY}&query=${searchText}`;
+  getSearchUrl(params: string) {
+    return `${BASE_URL}3/search/movie?api_key=${API_KEY}&${params}`;
   },
 };
 

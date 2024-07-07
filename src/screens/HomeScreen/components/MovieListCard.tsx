@@ -12,7 +12,7 @@ interface IProps {
 
 function MovieListCard(props: IProps) {
   const {title, movieList} = props;
-  if (!movieList) return null;
+  if (!movieList || movieList.length<=0) return null;
   function renderItem(item: IMovie, index: number) {
     if (!item) return null;
     return <MovieCard movie={item} />;

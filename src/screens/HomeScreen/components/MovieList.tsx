@@ -2,19 +2,20 @@ import {FlashList} from '@shopify/flash-list';
 import {useEffect, useRef, useState} from 'react';
 import MovieListCard from './MovieListCard';
 import usePaginated from '../../../common/hooks/usePaginated';
-import ApiURL from '../../../ApiURL';
+
 import Loader from '../../../common/components/Loader';
 import {ActivityIndicator} from 'react-native';
 import Colors from '../../../common/Colors';
 
 interface IProps {
   queryParams: string;
+  getApiUrl : (params :string)=>string;
 }
 
 const DEFAULT_YEAR = 2012;
 
 function MovieList(props: IProps) {
-  const {queryParams} = props;
+  const {queryParams, getApiUrl} = props;
   const currYearRef = useRef<number>(DEFAULT_YEAR);
   const [data, setData] = useState<any>([]);
   const [url, setUrl] = useState<string>('');
@@ -36,8 +37,8 @@ function MovieList(props: IProps) {
   const onEndReached = () => {
     currYearRef.current--;
     setUrl(
-      ApiURL.getMovieListUrl(
-        queryParams + `primary_release_year=${currYearRef.current}`,
+      getApiUrl(
+        queryParams + `&primary_release_year=${currYearRef.current}`,
       ),
     );
   };
@@ -50,8 +51,8 @@ function MovieList(props: IProps) {
     currYearRef.current = DEFAULT_YEAR;
     setData([]);
     setUrl(
-      ApiURL.getMovieListUrl(
-        queryParams + `primary_release_year=${currYearRef.current}`,
+      getApiUrl(
+        queryParams + `&primary_release_year=${currYearRef.current}`,
       ),
     );
   }, [queryParams]);

@@ -26,7 +26,7 @@ function HomeScreen(props: IProps) {
         selectedIdsSet={selectedIdsSet}
         navigation={navigation}
       />
-      <MovieList queryParams={queryParams} />
+      <MovieList getApiUrl={ApiURL.getMovieListUrl} queryParams={queryParams} />
     </View>
   );
 }
