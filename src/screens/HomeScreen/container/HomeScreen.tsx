@@ -13,7 +13,6 @@ interface IProps {
 }
 
 function HomeScreen(props: IProps) {
-  const {navigation} = props;
   const [shouldReload, setShouldReload] = useState<boolean>(false);
   const selectedIdsSet = useRef(new Set<number>()).current;
   const {data: gerneObj} = useFetch(ApiURL.getGenreListUrl());
@@ -24,7 +23,6 @@ function HomeScreen(props: IProps) {
         gerneList={gerneObj?.genres}
         setShouldReload={setShouldReload}
         selectedIdsSet={selectedIdsSet}
-        navigation={navigation}
       />
       <MovieList getApiUrl={ApiURL.getMovieListUrl} queryParams={queryParams} />
     </View>

@@ -3,8 +3,7 @@ import Colors from '../../../common/Colors';
 import Constants from '../../../common/Constants';
 import GenreList from './GenreList';
 import {IGenre} from '../interface';
-import {useCallback} from 'react';
-import {NavigationProp} from '@react-navigation/native';
+import {navigateToSearchScreen} from '../../../navigationUtils';
 
 const SEARCH_ICON = require('./../../../assets/searchIcon.png');
 
@@ -12,14 +11,10 @@ interface IProps {
   gerneList: IGenre[];
   setShouldReload: (reload: any) => void;
   selectedIdsSet: Set<number>;
-  navigation: NavigationProp<any>;
 }
 
 function Header(props: IProps) {
-  const {gerneList, setShouldReload, selectedIdsSet, navigation} = props;
-  const navigateToSearchScreen = useCallback(() => {
-    navigation.navigate(Constants.screens.searchScreen);
-  }, []);
+  const {gerneList, setShouldReload, selectedIdsSet} = props;
   return (
     <View style={styles.container}>
       <View style={styles.header}>
