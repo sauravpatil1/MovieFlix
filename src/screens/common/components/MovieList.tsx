@@ -16,7 +16,7 @@ const DEFAULT_YEAR = 2012;
 function MovieList(props: IProps) {
   const {queryParams, getApiUrl} = props;
   const currYearRef = useRef<number>(DEFAULT_YEAR);
-  const [data, setData] = useState<any>([]);
+  const [data, setData] = useState<any[]>([]);
   const [url, setUrl] = useState<string>('');
 
   const formatResponse = (response: any) => {
@@ -57,6 +57,7 @@ function MovieList(props: IProps) {
   }, [queryParams]);
 
   if ((!data || data.length == 0) && loading) return <Loader />;
+  
   function renderItem({item}) {
     return <MovieListCard title={item.year} movieList={item.movieList} />;
   }

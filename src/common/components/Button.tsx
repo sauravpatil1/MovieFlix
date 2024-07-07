@@ -1,6 +1,7 @@
 import {Pressable, StyleSheet, Text, TextStyle, ViewStyle} from 'react-native';
 import Constants from '../Constants';
 import Colors from '../Colors';
+import { memo } from 'react';
 
 interface IProp {
   title: string;
@@ -27,7 +28,7 @@ function Button(props: IProp) {
   );
 }
 
-export default Button;
+export default memo(Button);
 
 const styles = StyleSheet.create({
   button: {
