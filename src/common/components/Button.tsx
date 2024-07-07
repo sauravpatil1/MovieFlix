@@ -4,7 +4,7 @@ import Colors from '../Colors';
 
 interface IProp {
   title: string;
-  onPress?: () => {};
+  onPress?: () => void;
   style?: ViewStyle;
   activeStyle?: ViewStyle;
   textStyle?: TextStyle;

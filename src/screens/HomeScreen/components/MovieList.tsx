@@ -10,10 +10,12 @@ import Colors from '../../../common/Colors';
 
 interface IProps {
   searchText: string;
+  selectedIdsSet: Set<number>;
+  shouldReload: boolean;
 }
 
 function MovieList(props: IProps) {
-  const {searchText} = props;
+  const {searchText, selectedIdsSet, shouldReload} = props;
   const currYearRef = useRef(2012);
   const formatResponse = (response: any) => {
     return {
@@ -63,7 +65,7 @@ function MovieList(props: IProps) {
       }
     });
     return result;
-  }, [searchText, data]);
+  }, [searchText, data, shouldReload]);
 
   if ((!data || data.length == 0) && loading) return <Loader />;
   return (

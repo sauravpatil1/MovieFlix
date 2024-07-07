@@ -1,42 +1,39 @@
 import {ScrollView, StyleSheet} from 'react-native';
 import Constants from '../../../common/Constants';
 import Button from '../../../common/components/Button';
+import {IGenre} from '../interface';
+import {gerns} from '../../../apiData';
 
-const genre = [
-  'Action',
-  'Adventure',
-  'Animation',
-  'Comedy',
-  'Crime',
-  'Documentary',
-  'Drama',
-  'Family',
-  'Fantasy',
-  'Foreign',
-  'History',
-  'Horror',
-  'Musical',
-  'Mystery',
-  'Romance',
-  'Sci-Fi',
-  'Sport',
-  'Thriller',
-  'War',
-  'Western',
-];
+interface IProps {
+  gerneList: IGenre[];
+  selectedIdsSet: Set<number>;
+  setShouldReload: (reload: any) => void;
+}
 
-function GenreList() {
+function GenreList(props: IProps) {
+  const {gerneList = gerns.genres, selectedIdsSet, setShouldReload} = props;
+  if (!gerneList) return null;
   return (
     <ScrollView
       style={styles.container}
       horizontal
       showsHorizontalScrollIndicator={false}>
-      {genre.map(name => {
+      {gerneList.map(item => {
+        const {id, name} = item;
         return (
           <Button
             title={name}
             style={styles.button}
-            active={name === 'Comedy'}
+            active={selectedIdsSet.has(id)}
+            key={id}
+            onPress={() => {
+              if (selectedIdsSet.has(id)) {
+                selectedIdsSet.delete(id);
+              } else {
+                selectedIdsSet.add(id);
+              }
+              setShouldReload((prev: boolean) => !prev);
+            }}
           />
         );
       })}

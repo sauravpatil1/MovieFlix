@@ -3,7 +3,10 @@ import Colors from '../../../common/Colors';
 import Header from '../components/Header';
 import {NavigationProp} from '@react-navigation/native';
 import MovieList from '../components/MovieList';
-import {useState} from 'react';
+import {useRef, useState} from 'react';
+import useFetch from '../../../common/hooks/useFetch';
+import ApiURL from '../../../ApiURL';
+import {getQueryParams} from '../utils';
 
 interface IProps {
   navigation: NavigationProp<any>;
@@ -11,10 +14,24 @@ interface IProps {
 
 function HomeScreen(props: IProps) {
   const [searchText, setSearchText] = useState<string>('');
+  const [shouldReload, setShouldReload] = useState<boolean>(false);
+  const selectedIdsSet = useRef(new Set<number>()).current;
+  const {data: gerneObj} = useFetch(ApiURL.getGenreListUrl());
+  const queryParams = getQueryParams({searchText, selectedIdsSet});
   return (
     <View style={styles.container}>
-      <Header searchText={searchText} setSearchText={setSearchText} />
-      <MovieList searchText={searchText} />
+      <Header
+        searchText={searchText}
+        setSearchText={setSearchText}
+        gerneList={gerneObj?.genres}
+        setShouldReload={setShouldReload}
+        selectedIdsSet={selectedIdsSet}
+      />
+      <MovieList
+        searchText={searchText}
+        shouldReload={shouldReload}
+        selectedIdsSet={selectedIdsSet}
+      />
     </View>
   );
 }

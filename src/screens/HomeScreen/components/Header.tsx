@@ -2,14 +2,24 @@ import {StyleSheet, Text, TextInput, View} from 'react-native';
 import Colors from '../../../common/Colors';
 import Constants from '../../../common/Constants';
 import GenreList from './GenreList';
+import {IGenre} from '../interface';
 
 interface IProps {
   setSearchText: (text: string) => void;
   searchText: string;
+  gerneList: IGenre[];
+  setShouldReload: (reload: any) => void;
+  selectedIdsSet: Set<number>;
 }
 
 function Header(props: IProps) {
-  const {setSearchText, searchText} = props;
+  const {
+    setSearchText,
+    searchText,
+    gerneList,
+    setShouldReload,
+    selectedIdsSet,
+  } = props;
   return (
     <View style={styles.container}>
       <View style={styles.header}>
@@ -21,7 +31,11 @@ function Header(props: IProps) {
           value={searchText}
         />
       </View>
-      <GenreList />
+      <GenreList
+        gerneList={gerneList}
+        selectedIdsSet={selectedIdsSet}
+        setShouldReload={setShouldReload}
+      />
     </View>
   );
 }
