@@ -6,6 +6,7 @@ const Constants = {
   screens: {
     homeScreen: 'HomeScreen',
     movieDetailsScreen: 'MovieDetailsScreen',
+    searchScreen: 'SearchScreen',
   },
   dimens: {
     size_2: 2,

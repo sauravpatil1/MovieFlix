@@ -3,6 +3,7 @@ import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import Constants from './common/Constants';
 import HomeScreen from './screens/HomeScreen/container/HomeScreen';
 import MovieDetailsScreen from './screens/MovieDetailsScreen/container/MovieDetailsScreen';
+import SearchScreen from './screens/SearchScreen/container/SearchScreen';
 
 const Stack = createNativeStackNavigator();
 
@@ -12,6 +13,9 @@ const routeConfig = {
   },
   [Constants.screens.movieDetailsScreen]: {
     screen: MovieDetailsScreen,
+  },
+  [Constants.screens.searchScreen]: {
+    screen: SearchScreen,
   },
 };
 

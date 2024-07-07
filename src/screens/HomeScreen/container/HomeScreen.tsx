@@ -13,19 +13,18 @@ interface IProps {
 }
 
 function HomeScreen(props: IProps) {
-  const [searchText, setSearchText] = useState<string>('');
+  const {navigation} = props;
   const [shouldReload, setShouldReload] = useState<boolean>(false);
   const selectedIdsSet = useRef(new Set<number>()).current;
   const {data: gerneObj} = useFetch(ApiURL.getGenreListUrl());
-  const queryParams = getQueryParams({searchText, selectedIdsSet});
+  const queryParams = getQueryParams({selectedIdsSet});
   return (
     <View style={styles.container}>
       <Header
-        searchText={searchText}
-        setSearchText={setSearchText}
         gerneList={gerneObj?.genres}
         setShouldReload={setShouldReload}
         selectedIdsSet={selectedIdsSet}
+        navigation={navigation}
       />
       <MovieList queryParams={queryParams} />
     </View>

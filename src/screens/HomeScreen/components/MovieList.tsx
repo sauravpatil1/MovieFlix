@@ -1,5 +1,5 @@
 import {FlashList} from '@shopify/flash-list';
-import {useEffect, useMemo, useRef, useState} from 'react';
+import {useEffect, useRef, useState} from 'react';
 import MovieListCard from './MovieListCard';
 import usePaginated from '../../../common/hooks/usePaginated';
 import ApiURL from '../../../ApiURL';

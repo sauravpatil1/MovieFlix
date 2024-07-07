@@ -1,35 +1,32 @@
-import {StyleSheet, Text, TextInput, View} from 'react-native';
+import {Image, Pressable, StyleSheet, Text, View} from 'react-native';
 import Colors from '../../../common/Colors';
 import Constants from '../../../common/Constants';
 import GenreList from './GenreList';
 import {IGenre} from '../interface';
+import {useCallback} from 'react';
+import {NavigationProp} from '@react-navigation/native';
+
+const SEARCH_ICON = require('./../../../assets/searchIcon.png');
 
 interface IProps {
-  setSearchText: (text: string) => void;
-  searchText: string;
   gerneList: IGenre[];
   setShouldReload: (reload: any) => void;
   selectedIdsSet: Set<number>;
+  navigation: NavigationProp<any>;
 }
 
 function Header(props: IProps) {
-  const {
-    setSearchText,
-    searchText,
-    gerneList,
-    setShouldReload,
-    selectedIdsSet,
-  } = props;
+  const {gerneList, setShouldReload, selectedIdsSet, navigation} = props;
+  const navigateToSearchScreen = useCallback(() => {
+    navigation.navigate(Constants.screens.searchScreen);
+  }, []);
   return (
     <View style={styles.container}>
       <View style={styles.header}>
         <Text style={styles.title}>{Constants.strings.movieFlix}</Text>
-        <TextInput
-          style={styles.inputContainer}
-          placeholder="Search movie name"
-          onChangeText={setSearchText}
-          value={searchText}
-        />
+        <Pressable onPress={navigateToSearchScreen}>
+          <Image source={SEARCH_ICON} />
+        </Pressable>
       </View>
       <GenreList
         gerneList={gerneList}
