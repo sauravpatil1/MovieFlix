@@ -2,7 +2,7 @@ import {ScrollView, StyleSheet} from 'react-native';
 import Constants from '../../../common/Constants';
 import Button from '../../../common/components/Button';
 import {IGenre} from '../interface';
-import {gerns} from '../../../apiData';
+// import {gerns} from '../../../apiData';
 
 interface IProps {
   gerneList: IGenre[];
@@ -11,7 +11,7 @@ interface IProps {
 }
 
 function GenreList(props: IProps) {
-  const {gerneList = gerns.genres, selectedIdsSet, setShouldReload} = props;
+  const {gerneList , selectedIdsSet, setShouldReload} = props;
   if (!gerneList) return null;
   return (
     <ScrollView

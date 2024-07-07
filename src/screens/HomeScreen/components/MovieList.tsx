@@ -6,7 +6,6 @@ import ApiURL from '../../../ApiURL';
 import Loader from '../../../common/components/Loader';
 import {ActivityIndicator} from 'react-native';
 import Colors from '../../../common/Colors';
-// import data from '../../../apiData';
 
 interface IProps {
   queryParams: string;
@@ -34,14 +33,11 @@ function MovieList(props: IProps) {
     formatResponse,
   });
 
-  function renderItem({item}) {
-    return <MovieListCard title={item.year} movieList={item.movieList} />;
-  }
   const onEndReached = () => {
     currYearRef.current--;
     setUrl(
       ApiURL.getMovieListUrl(
-        `sort_by=popularity.desc&primary_release_year=${currYearRef.current}&page=1&vote_count.gte=100`,
+        queryParams + `primary_release_year=${currYearRef.current}`,
       ),
     );
   };
@@ -61,6 +57,9 @@ function MovieList(props: IProps) {
   }, [queryParams]);
 
   if ((!data || data.length == 0) && loading) return <Loader />;
+  function renderItem({item}) {
+    return <MovieListCard title={item.year} movieList={item.movieList} />;
+  }
   return (
     <FlashList
       data={data}
