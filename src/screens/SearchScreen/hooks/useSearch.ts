@@ -1,40 +1,32 @@
-import {useState, useEffect, useRef} from 'react';
+import {useEffect, useRef, useState} from 'react';
 
-const useSearch = (url: string, delay = 500) => {
-  const [results, setResults] = useState<any[]>([]);
-  const [loading, setLoading] = useState<boolean>(false);
-  const [error, setError] = useState(null);
-  const debounceRef = useRef(null);
+function useSearch() {
+  const [searchText, setSearchText] = useState<string>('');
+  const [debouncedSearchText, setDebouncedSearchText] =
+    useState<string>(searchText);
+
+  const debounceTimeoutRef = useRef<NodeJS.Timeout | null>(null);
 
   useEffect(() => {
-    setLoading(true);
-    setError(null);
-
-    if (debounceRef.current) {
-      clearTimeout(debounceRef.current);
+    if (debounceTimeoutRef.current) {
+      clearTimeout(debounceTimeoutRef.current);
     }
 
-    debounceRef.current = setTimeout(() => {
-      fetch(url)
-        .then(response => response.json())
-        .then(data => {
-          setResults(data);
-          setLoading(false);
-        })
-        .catch(err => {
-          setError(err);
-          setLoading(false);
-        });
-    }, delay);
+    debounceTimeoutRef.current = setTimeout(() => {
+      setDebouncedSearchText(searchText);
+    }, 300);
 
-    return () => clearTimeout(debounceRef.current);
-  }, [url, delay]);
-
+    return () => {
+      if (debounceTimeoutRef.current) {
+        clearTimeout(debounceTimeoutRef.current);
+      }
+    };
+  }, [searchText]);
   return {
-    results,
-    loading,
-    error,
+    searchText,
+    setSearchText,
+    debouncedSearchText,
   };
-};
+}
 
 export default useSearch;

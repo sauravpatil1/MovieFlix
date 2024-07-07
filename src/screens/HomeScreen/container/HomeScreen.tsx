@@ -2,18 +2,17 @@ import {StyleSheet, View} from 'react-native';
 import Colors from '../../../common/Colors';
 import Header from '../components/Header';
 import {NavigationProp} from '@react-navigation/native';
-import MovieList from '../components/MovieList';
 import {useRef, useState} from 'react';
 import useFetch from '../../../common/hooks/useFetch';
 import ApiURL from '../../../ApiURL';
 import {getQueryParams} from '../utils';
+import MovieList from '../../common/components/MovieList';
 
 interface IProps {
   navigation: NavigationProp<any>;
 }
 
 function HomeScreen(props: IProps) {
-  const {navigation} = props;
   const [shouldReload, setShouldReload] = useState<boolean>(false);
   const selectedIdsSet = useRef(new Set<number>()).current;
   const {data: gerneObj} = useFetch(ApiURL.getGenreListUrl());
@@ -24,9 +23,8 @@ function HomeScreen(props: IProps) {
         gerneList={gerneObj?.genres}
         setShouldReload={setShouldReload}
         selectedIdsSet={selectedIdsSet}
-        navigation={navigation}
       />
-      <MovieList queryParams={queryParams} />
+      <MovieList getApiUrl={ApiURL.getMovieListUrl} queryParams={queryParams} />
     </View>
   );
 }

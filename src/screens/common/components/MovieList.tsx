@@ -1,23 +1,22 @@
 import {FlashList} from '@shopify/flash-list';
 import {useEffect, useRef, useState} from 'react';
-import MovieListCard from './MovieListCard';
 import usePaginated from '../../../common/hooks/usePaginated';
-import ApiURL from '../../../ApiURL';
 import Loader from '../../../common/components/Loader';
 import {ActivityIndicator} from 'react-native';
 import Colors from '../../../common/Colors';
-// import data from '../../../apiData';
+import MovieListCard from './MovieListCard';
 
 interface IProps {
   queryParams: string;
+  getApiUrl : (params :string)=>string;
 }
 
 const DEFAULT_YEAR = 2012;
 
 function MovieList(props: IProps) {
-  const {queryParams} = props;
+  const {queryParams, getApiUrl} = props;
   const currYearRef = useRef<number>(DEFAULT_YEAR);
-  const [data, setData] = useState<any>([]);
+  const [data, setData] = useState<any[]>([]);
   const [url, setUrl] = useState<string>('');
 
   const formatResponse = (response: any) => {
@@ -34,14 +33,11 @@ function MovieList(props: IProps) {
     formatResponse,
   });
 
-  function renderItem({item}) {
-    return <MovieListCard title={item.year} movieList={item.movieList} />;
-  }
   const onEndReached = () => {
     currYearRef.current--;
     setUrl(
-      ApiURL.getMovieListUrl(
-        `sort_by=popularity.desc&primary_release_year=${currYearRef.current}&page=1&vote_count.gte=100`,
+      getApiUrl(
+        queryParams + `&primary_release_year=${currYearRef.current}`,
       ),
     );
   };
@@ -54,13 +50,17 @@ function MovieList(props: IProps) {
     currYearRef.current = DEFAULT_YEAR;
     setData([]);
     setUrl(
-      ApiURL.getMovieListUrl(
-        queryParams + `primary_release_year=${currYearRef.current}`,
+      getApiUrl(
+        queryParams + `&primary_release_year=${currYearRef.current}`,
       ),
     );
   }, [queryParams]);
 
   if ((!data || data.length == 0) && loading) return <Loader />;
+  
+  function renderItem({item}) {
+    return <MovieListCard title={item.year} movieList={item.movieList} />;
+  }
   return (
     <FlashList
       data={data}

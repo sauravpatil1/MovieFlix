@@ -4,6 +4,7 @@ import Constants from './common/Constants';
 import HomeScreen from './screens/HomeScreen/container/HomeScreen';
 import MovieDetailsScreen from './screens/MovieDetailsScreen/container/MovieDetailsScreen';
 import SearchScreen from './screens/SearchScreen/container/SearchScreen';
+import { navigationRef } from './navigationUtils';
 
 const Stack = createNativeStackNavigator();
 
@@ -23,7 +24,7 @@ const screenOptions = {header: () => null};
 
 function RootNavigation() {
   return (
-    <NavigationContainer>
+    <NavigationContainer ref={navigationRef}>
       <Stack.Navigator
         initialRouteName={Constants.screens.homeScreen}
         screenOptions={screenOptions}>
