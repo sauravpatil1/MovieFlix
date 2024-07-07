@@ -1,3 +1,8 @@
+/**
+ * This hook is used for paginationated api call.
+ * When we change url it give previous result and current result.
+ */
+
 import {useState, useEffect} from 'react';
 
 interface IPaginateParams {

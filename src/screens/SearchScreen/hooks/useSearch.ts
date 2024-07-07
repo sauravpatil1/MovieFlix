@@ -1,3 +1,7 @@
+/**
+ * This hook provide debounce search text which can be used to optimize api calls.
+ */
+
 import {useEffect, useRef, useState} from 'react';
 
 function useSearch() {

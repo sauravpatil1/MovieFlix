@@ -1,3 +1,9 @@
+/**
+ * Common navigation file from which we can use function to navigate to defferent screens.
+ * Added interceptor to navigate function to have control at single point
+ * It avoid prop drill down of navigation object
+ */
+
 import {createNavigationContainerRef} from '@react-navigation/native';
 import Constants from './common/Constants';
 import {IMovie} from './screens/HomeScreen/interface';

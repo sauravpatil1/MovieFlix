@@ -10,7 +10,7 @@ interface IProps {
 }
 
 function GenreList(props: IProps) {
-  const {gerneList , selectedIdsSet, setShouldReload} = props;
+  const {gerneList, selectedIdsSet, setShouldReload} = props;
   if (!gerneList) return null;
   return (
     <ScrollView

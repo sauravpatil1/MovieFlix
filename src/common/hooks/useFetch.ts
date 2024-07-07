@@ -1,3 +1,8 @@
+/**
+ * This hook is used to fetch data based on url provided.
+ * This provide different state of api call.
+ */
+
 import {useState, useEffect} from 'react';
 
 const useFetch = (url: string) => {

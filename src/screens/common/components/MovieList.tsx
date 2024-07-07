@@ -8,7 +8,7 @@ import MovieListCard from './MovieListCard';
 
 interface IProps {
   queryParams: string;
-  getApiUrl : (params :string)=>string;
+  getApiUrl: (params: string) => string;
 }
 
 const DEFAULT_YEAR = 2012;
@@ -36,9 +36,7 @@ function MovieList(props: IProps) {
   const onEndReached = () => {
     currYearRef.current--;
     setUrl(
-      getApiUrl(
-        queryParams + `&primary_release_year=${currYearRef.current}`,
-      ),
+      getApiUrl(queryParams + `&primary_release_year=${currYearRef.current}`),
     );
   };
 
@@ -50,14 +48,12 @@ function MovieList(props: IProps) {
     currYearRef.current = DEFAULT_YEAR;
     setData([]);
     setUrl(
-      getApiUrl(
-        queryParams + `&primary_release_year=${currYearRef.current}`,
-      ),
+      getApiUrl(queryParams + `&primary_release_year=${currYearRef.current}`),
     );
   }, [queryParams]);
 
   if ((!data || data.length == 0) && loading) return <Loader />;
-  
+
   function renderItem({item}) {
     return <MovieListCard title={item.year} movieList={item.movieList} />;
   }

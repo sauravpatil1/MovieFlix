@@ -1,7 +1,7 @@
 import {Pressable, StyleSheet, Text, TextStyle, ViewStyle} from 'react-native';
 import Constants from '../Constants';
 import Colors from '../Colors';
-import { memo } from 'react';
+import {memo} from 'react';
 
 interface IProp {
   title: string;

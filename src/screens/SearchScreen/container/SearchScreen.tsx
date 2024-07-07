@@ -16,7 +16,10 @@ function SearchScreen() {
         placeholder="Search movie"
       />
       {debouncedSearchText && (
-        <MovieList queryParams={`query=${debouncedSearchText}`} getApiUrl={ApiURL.getSearchUrl} />
+        <MovieList
+          queryParams={`query=${debouncedSearchText}`}
+          getApiUrl={ApiURL.getSearchUrl}
+        />
       )}
     </View>
   );

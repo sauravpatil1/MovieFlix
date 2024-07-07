@@ -1,8 +1,8 @@
 import {Image, Pressable, StyleSheet, Text, View} from 'react-native';
 import Constants from '../../../common/Constants';
 import Colors from '../../../common/Colors';
-import { IMovie } from '../../HomeScreen/interface';
-import { navigateToMovieDetailsScreen } from '../../../navigationUtils';
+import {IMovie} from '../../HomeScreen/interface';
+import {navigateToMovieDetailsScreen} from '../../../navigationUtils';
 
 interface IProps {
   movie: IMovie;
@@ -12,10 +12,15 @@ function MovieCard(props: IProps) {
   const {movie} = props;
   const {title, overview, poster_path} = movie;
   return (
-    <Pressable style={styles.container} onPress={()=>{
-      navigateToMovieDetailsScreen(movie);
-    }}>
-      <Image style={styles.image} source={{uri:Constants.IMAGE_HOST + poster_path }} />
+    <Pressable
+      style={styles.container}
+      onPress={() => {
+        navigateToMovieDetailsScreen(movie);
+      }}>
+      <Image
+        style={styles.image}
+        source={{uri: Constants.IMAGE_HOST + poster_path}}
+      />
       <View>
         <Text style={styles.title} numberOfLines={2}>
           {title}
@@ -33,7 +38,7 @@ export default MovieCard;
 const styles = StyleSheet.create({
   image: {
     height: Constants.dimens.size_200,
-    resizeMode : 'contain'
+    resizeMode: 'contain',
   },
   container: {
     height: Constants.dimens.size_300,
