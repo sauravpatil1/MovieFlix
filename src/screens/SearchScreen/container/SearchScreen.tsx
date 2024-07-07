@@ -34,6 +34,7 @@ const styles = StyleSheet.create({
   },
   inputContainer: {
     backgroundColor: Colors.white,
+    color: Colors.greyishBlack,
     borderRadius: Constants.dimens.size_2,
     overflow: 'hidden',
     margin: Constants.dimens.size_8,
