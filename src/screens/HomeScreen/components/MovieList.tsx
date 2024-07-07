@@ -1,5 +1,5 @@
 import {FlashList} from '@shopify/flash-list';
-import {useEffect, useMemo, useRef} from 'react';
+import {useEffect, useMemo, useRef, useState} from 'react';
 import MovieListCard from './MovieListCard';
 import usePaginated from '../../../common/hooks/usePaginated';
 import ApiURL from '../../../ApiURL';
@@ -9,26 +9,30 @@ import Colors from '../../../common/Colors';
 // import data from '../../../apiData';
 
 interface IProps {
-  searchText: string;
-  selectedIdsSet: Set<number>;
-  shouldReload: boolean;
+  queryParams: string;
 }
 
+const DEFAULT_YEAR = 2012;
+
 function MovieList(props: IProps) {
-  const {searchText, selectedIdsSet, shouldReload} = props;
-  const currYearRef = useRef(2012);
+  const {queryParams} = props;
+  const currYearRef = useRef<number>(DEFAULT_YEAR);
+  const [data, setData] = useState<any>([]);
+  const [url, setUrl] = useState<string>('');
+
   const formatResponse = (response: any) => {
     return {
       year: currYearRef.current,
       movieList: response?.results,
     };
   };
-  const {data, loading, error, setUrl} = usePaginated(
-    ApiURL.getMovieListUrl(
-      `sort_by=popularity.desc&primary_release_year=${currYearRef.current}&page=1&vote_count.gte=100`,
-    ),
+
+  const {loading, error} = usePaginated({
+    data,
+    setData,
+    url,
     formatResponse,
-  );
+  });
 
   function renderItem({item}) {
     return <MovieListCard title={item.year} movieList={item.movieList} />;
@@ -46,36 +50,25 @@ function MovieList(props: IProps) {
     error && onEndReached();
   }, [error]);
 
-  const formattedData = useMemo(() => {
-    if (!searchText) return data;
-    const result: any[] = [];
-    data.forEach(dataItem => {
-      const movieList = dataItem.movieList;
-      const match = [];
-      for (let i = 0; i < movieList.length; i++) {
-        if (movieList[i].title.includes(searchText)) {
-          match.push(movieList[i]);
-        }
-      }
-      if (match.length > 0) {
-        result.push({
-          year: dataItem.year,
-          movieList: match,
-        });
-      }
-    });
-    return result;
-  }, [searchText, data, shouldReload]);
+  useEffect(() => {
+    currYearRef.current = DEFAULT_YEAR;
+    setData([]);
+    setUrl(
+      ApiURL.getMovieListUrl(
+        queryParams + `primary_release_year=${currYearRef.current}`,
+      ),
+    );
+  }, [queryParams]);
 
   if ((!data || data.length == 0) && loading) return <Loader />;
   return (
     <FlashList
-      data={formattedData}
+      data={data}
       renderItem={renderItem}
       onEndReached={onEndReached}
       estimatedItemSize={3000}
       onEndReachedThreshold={0.5}
-      extraData={formattedData}
+      extraData={data}
       ListFooterComponent={() =>
         loading && <ActivityIndicator color={Colors.darkRed} />
       }

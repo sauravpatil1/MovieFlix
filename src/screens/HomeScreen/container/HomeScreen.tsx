@@ -27,11 +27,7 @@ function HomeScreen(props: IProps) {
         setShouldReload={setShouldReload}
         selectedIdsSet={selectedIdsSet}
       />
-      <MovieList
-        searchText={searchText}
-        shouldReload={shouldReload}
-        selectedIdsSet={selectedIdsSet}
-      />
+      <MovieList queryParams={queryParams} />
     </View>
   );
 }

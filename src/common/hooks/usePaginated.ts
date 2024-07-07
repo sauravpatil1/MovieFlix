@@ -1,10 +1,20 @@
 import {useState, useEffect} from 'react';
 
-const usePaginated = (initialUrl: string, formatResponse?:(response : any)=>any) => {
-  const [data, setData] = useState<any[]>([]);
+interface IPaginateParams {
+  url: string;
+  data: any[];
+  setData: (data: any) => any;
+  formatResponse?: (response: any) => any;
+}
+
+const usePaginated = ({
+  url,
+  data,
+  setData,
+  formatResponse,
+}: IPaginateParams) => {
   const [loading, setLoading] = useState<boolean>(false);
   const [error, setError] = useState(null);
-  const [url, setUrl] = useState<string>(initialUrl);
 
   const fetchData = async () => {
     setLoading(true);
@@ -15,8 +25,8 @@ const usePaginated = (initialUrl: string, formatResponse?:(response : any)=>any)
       }
       const result = await response.json();
       setData(prev => {
-        if(formatResponse){
-          return [...prev, formatResponse(result)]
+        if (formatResponse) {
+          return [...prev, formatResponse(result)];
         }
         return [...prev, result];
       });
@@ -32,7 +42,7 @@ const usePaginated = (initialUrl: string, formatResponse?:(response : any)=>any)
     fetchData();
   }, [url]);
 
-  return {data, loading, error, setUrl};
+  return {data, loading, error};
 };
 
 export default usePaginated;
